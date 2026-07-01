@@ -15,10 +15,9 @@
     <h1>John Wood Park</h1>
     <p>Seoul, Korea</p>
 <p>
-  <span class="copy-email" onclick="copyEmail()">
+<span id="email-copy" class="copy-email" onclick="copyEmail()">
     parkjohnwood@gmail.com
   </span>
-  <span id="copy-message">Copied</span>
 </p>
 
 <p>
@@ -71,18 +70,30 @@
 
 </main>
 
- <script>
+<script>
+const emailText = "parkjohnwood@gmail.com";
+
 function copyEmail() {
-  const message = document.getElementById("copy-message");
+    const email = document.getElementById("email-copy");
 
-  navigator.clipboard.writeText("parkjohnwood@gmail.com").then(() => {
-    message.style.opacity = "1";
+    navigator.clipboard.writeText(emailText)
+        .then(showCopied)
+        .catch(() => {
+            email.textContent = "(copy failed)";
+            setTimeout(() => {
+                email.textContent = emailText;
+            }, 800);
+        });
 
-    clearTimeout(window.copyTimeout);
-    window.copyTimeout = setTimeout(() => {
-      message.style.opacity = "0";
-    }, 1000);
-  });
+    function showCopied() {
+        clearTimeout(window.copyTimeout);
+
+        email.textContent = "(copied!)";
+
+        window.copyTimeout = setTimeout(() => {
+            email.textContent = emailText;
+        }, 800);
+    }
 }
 </script>
   
