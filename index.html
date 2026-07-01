@@ -14,8 +14,16 @@
   <section class="intro">
     <h1>John Wood Park</h1>
     <p>Seoul, Korea</p>
-    <p><a href="mailto:parkjohnwood@gmail.com">parkjohnwood@gmail.com</a></p>
-    <p><a href="https://www.instagram.com/johnwoodpark" target="_blank" rel="noopener noreferrer">https://www.instagram.com/johnwoodpark</a></p>
+<p>
+  <span class="copy-email" onclick="copyEmail()">
+    parkjohnwood@gmail.com
+  </span>
+  <span id="copy-message">Copied</span>
+</p>
+
+<p>
+  <a href="https://www.instagram.com/johnwoodpark" target="_blank" rel="noopener noreferrer">instagram</a>
+</p>
     <p><a href="#cv">CV</a></p>
 
     <div class="index-block">
@@ -63,5 +71,20 @@
 
 </main>
 
+ <script>
+function copyEmail() {
+  const message = document.getElementById("copy-message");
+
+  navigator.clipboard.writeText("parkjohnwood@gmail.com").then(() => {
+    message.style.opacity = "1";
+
+    clearTimeout(window.copyTimeout);
+    window.copyTimeout = setTimeout(() => {
+      message.style.opacity = "0";
+    }, 1000);
+  });
+}
+</script>
+  
 </body>
 </html>
